@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morning Brief — Personal Newsroom</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f; --bg-soft: #0b1628; --panel: rgba(12,22,40,0.88);
+      --line: rgba(151,170,210,0.18); --text: #f5f7ff;
+      --muted: #a4b1cb; --muted-strong: #c4cde1;
+      --accent: #79b8ff; --accent-2: #8b7dff; --accent-3: #3dd6c6;
+      --success: #68d391; --warning: #f6c25b; --danger: #ff7a9e;
+      --shadow: 0 24px 60px rgba(0,0,0,0.35);
+      --radius-xl: 28px; --radius-lg: 22px; --radius-md: 16px; --radius-sm: 999px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, rgba(121,184,255,0.18), transparent 30%),
+                  radial-gradient(circle at 80% 10%, rgba(139,125,255,0.14), transparent 25%),
+                  linear-gradient(180deg, #08111d 0%, #050b14 100%);
+      color: var(--text); padding: 18px;
+    }
+    .shell { width: min(100%, 560px); margin: 0 auto; display: grid; gap: 16px; }
+    .card { position: relative; overflow: hidden; background: var(--panel);
+             border: 1px solid var(--line); border-radius: var(--radius-xl);
+             box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+    .card::before { content: ""; position: absolute; inset: 0;
+                     background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent 25%);
+                     pointer-events: none; }
+    .hero { padding: 22px 20px 20px;
+             background: radial-gradient(circle at top right, rgba(61,214,198,0.18), transparent 35%),
+                         radial-gradient(circle at top left, rgba(121,184,255,0.20), transparent 30%),
+                         linear-gradient(180deg, rgba(17,29,49,0.98), rgba(11,22,40,0.98)); }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+                color: var(--muted); font-weight: 700; margin-bottom: 12px; }
+    h1 { font-size: 2rem; letter-spacing: -0.04em; margin: 0 0 8px; }
+    .subtitle { color: var(--muted-strong); font-size: 0.95rem; margin: 0; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px;
+              border-radius: var(--radius-sm); background: rgba(255,255,255,0.06);
+              border: 1px solid rgba(255,255,255,0.08); color: var(--muted-strong);
+              font-size: 0.78rem; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .meta-chip { display: inline-flex; align-items: center; padding: 7px 11px;
+                   border-radius: var(--radius-sm); background: rgba(255,255,255,0.04);
+                   border: 1px solid rgba(255,255,255,0.07); color: var(--muted);
+                   font-size: 0.78rem; }
+    .stories { padding: 16px 20px 20px; display: grid; gap: 14px; }
+    .story { padding: 16px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+               border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); }
+    .story-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .rank { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px;
+              background: linear-gradient(180deg, rgba(121,184,255,0.22), rgba(139,125,255,0.18));
+              color: white; font-weight: 800; font-size: 0.95rem; }
+    .impact.high { color: #fff4cf; border-color: rgba(246,194,91,0.28); background: rgba(246,194,91,0.12);
+                     padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.74rem; font-weight: 700; }
+    .topic { color: var(--accent); font-size: 0.78rem; font-weight: 700;
+              text-transform: uppercase; letter-spacing: 0.08em; }
+    .story h3 { font-size: 1.02rem; line-height: 1.35; letter-spacing: -0.02em; margin: 8px 0 0; }
+    .summary { margin-top: 10px; color: var(--muted-strong); line-height: 1.55; font-size: 0.93rem; }
+    .why { padding-top: 10px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .why-label { color: var(--text); font-weight: 700; }
+    .link-row { margin-top: 14px; display: flex; align-items: center; justify-content: space-between;
+                  gap: 12px; color: var(--muted); font-size: 0.82rem; }
+    .link-row a { color: var(--accent); font-weight: 700; }
+    .footer { padding: 18px 20px 20px; }
+    .footer-note { color: var(--muted); font-size: 0.86rem; margin: 0; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card hero">
+      <div class="eyebrow">Personal Newsroom</div>
+      <h1>Morning Brief</h1>
+      <p class="subtitle">Fast signal for Enrique before the day starts.</p>
+      <div class="chip-row">
+        <span class="chip">Overnight Scan</span>
+        <span class="chip">Mobile Read</span>
+        <span class="chip">High Signal</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-chip">Sunday, March 22</span>
+        <span class="meta-chip">America/Chicago</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="stories">
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">1</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Swarmer IPO Surge Puts Ukraine-Born Drone AI In Focus</h3>
+          <p class="summary">Ukraine’s war showed that the edge in drone warfare may lie as much in software as hardware. Demand is rising for autonomous systems and the software behind them.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/davidkirichenko/2026/03/21/swarmer-ipo-surge-puts-ukraine-born-drone-ai-in-focus/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">2</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">technology</p>
+          <h3>Weekly poll results: the Nothing Phone (4a) Pro is the fan favorite, while the (4a) takes a step back</h3>
+          <p class="summary">Last year, the Nothing Phone (3a) was voted as having a better value than its (3a) Pro sibling, while people that might have bought the Pro were instead pulled towards the then-upcoming Nothing Phone (3) flagship. So, when we posted last week’s poll, we were sure that the (4a) would prevail over its Pro sibling. After all, the Nothing Phone (4a) closed the camera gap to the Pro. But look at its poll results – 25% of voters prefer the Pro, while some 40% of the vote is split between people who li</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: GSMArena.com - Latest articles</span>
+            <a href="https://www.gsmarena.com/weekly_poll_results_the_nothing_phone_4a_pro_is_the_fan_favorite_while_the_4a_takes_a_step_back-news-72009.php">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">3</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>LAFC&amp;#39;s Hugo Lloris posts record 5th straight shutout to begin season in scoreless draw with Austin</h3>
+          <p class="summary">Hugo Lloris finished with two saves for Los Angeles FC in a record fifth straight shutout to begin a season, and Brad Stuver stopped the only shot he faced for Austin FC in a scoreless draw on Saturday night. Lloris and LAFC (4-0-1) began the season with four shutout victories, just one of four teams in league history to accomplish the feat. Lloris nearly surrendered his first goal of the season in the 63rd minute, but a Myrto Uzuni netter off a corner kick by Facundo Torres was disallowed after</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/lafcs-hugo-lloris-posts-record-041433914.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">4</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Kevin Durant passes Michael Jordan for No 5 on NBA scoring list in Rockets&amp;#39; win</h3>
+          <p class="summary">On the night Kevin Durant passed Michael Jordan for fifth on the NBA’s career scoring list, the 37-year-old star was already looking ahead. Durant scored 27 points in Houston's win over the Miami Heat on Saturday night to move past Jordan. Durant, who was the second overall pick in the 2007 draft, had 21 points entering the fourth quarter and made a 3-pointer with less than five minutes left to inch close to passing Jordan.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/kevin-durant-passes-michael-jordan-040105903.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">5</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Vikings Draft Thoughts</h3>
+          <p class="summary">The NFL Draft is still a little over a month away, but for the Minnesota Vikings a lot is riding on this draft. Vikings president and co-owner Mark Wilf made that clear in his statement following the release of general manager Kwesi Adofo-Mensah at the end of January, and he’s right. Between the Vikings salary […]</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/vikings-draft-thoughts-041559884.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">6</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>UCLA clamps down after halftime, steamrolls Cal Baptist 96-43 in March Madness</h3>
+          <p class="summary">After giving up five 3-pointers in a competitive first half, UCLA had seen enough. The Bruins allowed just one in a dominant second half on the way to a 96-43 rout of Cal Baptist in the opening round of March Madness on Saturday night. The top-seeded Bruins (32-1) were led by Lauren Betts with 22 points and 10 rebounds.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/ucla-clamps-down-halftime-steamrolls-041108780.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">7</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Braves News: Didier Fuentes makes roster, Spring Breakout, more</h3>
+          <p class="summary">Didier Fuentes has indeed made the Braves’ Opening Day roster and that is an exciting development for Braves fans, as the 20 year old has looked phenomenal this spring. There have been shades of vintage Spencer Strider from Fuentes this spring, but he may still need that third pitch to be able to consistently be […]</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/braves-news-didier-fuentes-makes-040100614.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">8</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Bianconere held at Genoa</h3>
+          <p class="summary">The Juventus Women’s First Team were held to a goalless draw away at Genoa on Serie A Women Matchday 17.THE MATCH REPORTThings were cagey to begin with as the hosts stood firm at the back, making li...</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/bianconere-held-genoa-040300757.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">9</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Squad List | Juventus-Sassuolo</h3>
+          <p class="summary">The Juventus Men’s First Team are back at home at the Allianz Stadium to host Sassuolo for their Serie A Matchday 30 on Saturday, 21 March, at 20:45 CET.Below is the list of players called up for th...</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/squad-list-juventus-sassuolo-040300774.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">10</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>NEVER AGAIN: Juventus against all forms of racism</h3>
+          <p class="summary">On the International Day for the Elimination of Racial Discrimination, Juventus takes a stand with a clear and direct message: racism has no place in football, neither today nor in the future.This ev...</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo! Sports - News, Scores, Standings, Rumors, Fantasy Games</span>
+            <a href="https://sports.yahoo.com/articles/never-again-juventus-against-forms-040100131.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">11</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Basic Materials Roundup: Market Talk</h3>
+          <p class="summary"></p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo Finance</span>
+            <a href="https://www.wsj.com/articles/basic-materials-roundup-market-talk-2f669db1?siteid=yhoof2&yptr=yahoo">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">12</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Daily ETF Flows: SCHD Takes No. 1 Spot</h3>
+          <p class="summary"></p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo Finance</span>
+            <a href="https://finance.yahoo.com/markets/options/articles/daily-etf-flows-schd-takes-210004601.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">13</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>The Dealmaking 3: MLB &amp; Adobe Expanding Partnership, AI in Pickleball, Apple TV’s Deal with F1</h3>
+          <p class="summary"></p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo Finance</span>
+            <a href="https://finance.yahoo.com/markets/stocks/articles/dealmaking-3-mlb-adobe-expanding-210232252.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">14</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Super Micro Dives As U.S. Accuses Execs Of Smuggling Nvidia Chips To China</h3>
+          <p class="summary"></p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo Finance</span>
+            <a href="https://www.investors.com/news/technology/super-micro-stock-dives-us-accuses-execs-smuggling-nvidia-chips-china/?src=A00220&yptr=yahoo">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">15</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Up 33% YTD, This Stock Isn’t Making Headlines, But Investors Keep Buying</h3>
+          <p class="summary"></p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Yahoo Finance</span>
+            <a href="https://finance.yahoo.com/markets/stocks/articles/33-ytd-stock-isn-t-210753782.html">Read more →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card footer">
+      <p class="footer-note">— 15 items — Personal Newsroom</p>
+    </section>
+  </main>
+</body>
+</html>
