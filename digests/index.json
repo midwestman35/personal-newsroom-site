@@ -4,6 +4,12 @@
       "title": "Morning Brief",
       "versions": [
         {
+          "date": "2026-03-25",
+          "json_path": "digests/morning-brief/2026-03-25.json",
+          "html_path": "archive/2026-03-25-morning-brief.html",
+          "item_count": 8
+        },
+        {
           "date": "2026-03-24",
           "json_path": "digests/morning-brief/2026-03-24.json",
           "html_path": "archive/2026-03-24-morning-brief.html",
