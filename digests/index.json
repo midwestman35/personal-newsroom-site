@@ -22,6 +22,17 @@
           "item_count": 15
         }
       ]
+    },
+    "finance-close": {
+      "title": "Finance Close",
+      "versions": [
+        {
+          "date": "2026-03-25",
+          "json_path": "digests/finance-close/2026-03-25.json",
+          "html_path": "archive/2026-03-25-finance-close.html",
+          "item_count": 15
+        }
+      ]
     }
   }
 }

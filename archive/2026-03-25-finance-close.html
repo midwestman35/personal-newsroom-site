@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finance Close — Personal Newsroom</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f; --bg-soft: #0b1628; --panel: rgba(12,22,40,0.88);
+      --line: rgba(151,170,210,0.18); --text: #f5f7ff;
+      --muted: #a4b1cb; --muted-strong: #c4cde1;
+      --accent: #79b8ff; --accent-2: #8b7dff; --accent-3: #3dd6c6;
+      --success: #68d391; --warning: #f6c25b; --danger: #ff7a9e;
+      --shadow: 0 24px 60px rgba(0,0,0,0.35);
+      --radius-xl: 28px; --radius-lg: 22px; --radius-md: 16px; --radius-sm: 999px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, rgba(121,184,255,0.18), transparent 30%),
+                  radial-gradient(circle at 80% 10%, rgba(139,125,255,0.14), transparent 25%),
+                  linear-gradient(180deg, #08111d 0%, #050b14 100%);
+      color: var(--text); padding: 18px;
+    }
+    .shell { width: min(100%, 560px); margin: 0 auto; display: grid; gap: 16px; }
+    .card { position: relative; overflow: hidden; background: var(--panel);
+             border: 1px solid var(--line); border-radius: var(--radius-xl);
+             box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+    .card::before { content: ""; position: absolute; inset: 0;
+                     background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent 25%);
+                     pointer-events: none; }
+    .hero { padding: 22px 20px 20px;
+             background: radial-gradient(circle at top right, rgba(61,214,198,0.18), transparent 35%),
+                         radial-gradient(circle at top left, rgba(121,184,255,0.20), transparent 30%),
+                         linear-gradient(180deg, rgba(17,29,49,0.98), rgba(11,22,40,0.98)); }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+                color: var(--muted); font-weight: 700; margin-bottom: 12px; }
+    h1 { font-size: 2rem; letter-spacing: -0.04em; margin: 0 0 8px; }
+    .subtitle { color: var(--muted-strong); font-size: 0.95rem; margin: 0; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px;
+              border-radius: var(--radius-sm); background: rgba(255,255,255,0.06);
+              border: 1px solid rgba(255,255,255,0.08); color: var(--muted-strong);
+              font-size: 0.78rem; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .meta-chip { display: inline-flex; align-items: center; padding: 7px 11px;
+                   border-radius: var(--radius-sm); background: rgba(255,255,255,0.04);
+                   border: 1px solid rgba(255,255,255,0.07); color: var(--muted);
+                   font-size: 0.78rem; }
+    .stories { padding: 16px 20px 20px; display: grid; gap: 14px; }
+    .story { padding: 16px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+               border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); }
+    .story-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .rank { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px;
+              background: linear-gradient(180deg, rgba(121,184,255,0.22), rgba(139,125,255,0.18));
+              color: white; font-weight: 800; font-size: 0.95rem; }
+    .impact.high { color: #fff4cf; border-color: rgba(246,194,91,0.28); background: rgba(246,194,91,0.12);
+                     padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.74rem; font-weight: 700; }
+    .topic { color: var(--accent); font-size: 0.78rem; font-weight: 700;
+              text-transform: uppercase; letter-spacing: 0.08em; }
+    .story h3 { font-size: 1.02rem; line-height: 1.35; letter-spacing: -0.02em; margin: 8px 0 0; }
+    .summary { margin-top: 10px; color: var(--muted-strong); line-height: 1.55; font-size: 0.93rem; }
+    .why { padding-top: 10px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .why-label { color: var(--text); font-weight: 700; }
+    .link-row { margin-top: 14px; display: flex; align-items: center; justify-content: space-between;
+                  gap: 12px; color: var(--muted); font-size: 0.82rem; }
+    .link-row a { color: var(--accent); font-weight: 700; }
+    .footer { padding: 18px 20px 20px; }
+    .footer-note { color: var(--muted); font-size: 0.86rem; margin: 0; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card hero">
+      <div class="eyebrow">Personal Newsroom</div>
+      <h1>Finance Close</h1>
+      <p class="subtitle">Fast signal for Enrique before the day starts.</p>
+      <div class="chip-row">
+        <span class="chip">Overnight Scan</span>
+        <span class="chip">Mobile Read</span>
+        <span class="chip">High Signal</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-chip">Wednesday, March 25</span>
+        <span class="meta-chip">America/Chicago</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="stories">
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">1</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Inflation target held at 4% for next five years</h3>
+          <p class="summary">India has maintained its retail inflation target at 4 percent for the Reserve Bank of India. This decision ensures continuity and price stability amidst global economic uncertainties. The framework, set for another five years until March 2031, obligates the RBI to manage monetary policy for price control. This move influences government fiscal measures, aiming for overall economic stability.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Economic Times</span>
+            <a href="https://economictimes.indiatimes.com/news/economy/policy/inflation-target-held-at-4-for-next-five-years/articleshow/129810690.cms">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">2</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Finance Minister Nirmala Sitharaman moves Bill to amend IBC, speed up resolution</h3>
+          <p class="summary">A new bill aims to speed up bankruptcy resolution in India. Finance Minister Nirmala Sitharaman introduced amendments to the Insolvency and Bankruptcy Code. The proposed changes focus on creditor-led, out-of-court settlements. This aims to reduce delays and improve the process for resolving insolvent companies. The bill also addresses cross-border and corporate group insolvency cases.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Economic Times</span>
+            <a href="https://economictimes.indiatimes.com/news/economy/policy/finance-minister-nirmala-sitharaman-moves-bill-to-amend-ibc-speed-up-resolution/articleshow/129810621.cms">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">3</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Bulk deals: Mukul Agrawal sells stake in microcap laggard; Societe General buys Rs 76 crore stake in Sammaan Capital</h3>
+          <p class="summary">French bank Societe Generale has acquired shares worth Rs 76 crore in Sammaan Capital. This comes as Abu Dhabi's International Holding Company plans a controlling stake acquisition. In a separate transaction, investor Mukul Agrawal sold shares valued at Rs 8 crore in Siyaram Recycling Industries. Sammaan Capital's stock has shown strong performance over the past year.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Economic Times</span>
+            <a href="https://economictimes.indiatimes.com/markets/us-stocks/news/bulk-deals-mukul-agrawal-sells-stake-in-microcap-laggard-societe-general-buys-rs-76-crore-stake-in-sammaan-capital/articleshow/129806426.cms">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">4</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>India gathers data to counter US claims of excess capacity</h3>
+          <p class="summary">India is compiling detailed industry data following a US Section 301 probe into alleged excess capacity in sectors like petrochemicals and steel. The commerce ministry is gathering information on production, employment, and policy support to address US concerns about practices potentially burdening American commerce.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Economic Times</span>
+            <a href="https://economictimes.indiatimes.com/news/economy/foreign-trade/india-gathers-data-to-counter-us-claims-of-excess-capacity/articleshow/129810831.cms">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">5</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Lok Sabha approves Finance Bill, tax rules eased</h3>
+          <p class="summary">The Lok Sabha approved the Finance Bill, introducing enhanced tax authority powers and changes to share buyback taxation, capping the surcharge at 12%. The bill also allows retrospective tax case reopening and revalidation of past orders. Finance Minister Nirmala Sitharaman stated the aim is to reduce litigation and compliance burdens for small taxpayers and businesses.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Economic Times</span>
+            <a href="https://economictimes.indiatimes.com/news/economy/policy/lok-sabha-approves-finance-bill-tax-rules-eased/articleshow/129810524.cms">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">6</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>German Pair Takes Narrow Lead In Race For Figure Skating World Title</h3>
+          <p class="summary">In a repeat of the short program standings from the 2026 Olympics, Germany’s Minerva Hase and Nikita Volodin won the Pairs short program competition at the 2026 World Championships over Georgian and Canadian pairs.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/carolineprice/2026/03/25/german-pair-takes-narrow-lead-in-race-for-figure-skating-world-title/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">7</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Ilia Malinin Eyes Third World Title And Olympic Redemption In Prague</h3>
+          <p class="summary">Ilia Malinin skates tomorrow for a shot at redemption. After a heartbreaking result at the Milan-Cortina Olympics, the &quot;Quad God&quot; chases a historic three-peat in Prague at the 2026 World Championships.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/carolineprice/2026/03/25/ilia-malinin-eyes-third-world-title-and-olympic-redemption-in-prague/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">8</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>SpaceX Advance Guard Joins Tech Skirmishes To Protect Starlink In Iran</h3>
+          <p class="summary">While battling the U.S., Iran’s rulers are also staging a war-within-a-war, aimed at destroying the SpaceX stations enabling daredevil dissidents to connect with the Web.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/kevinholdenplatt/2026/03/25/spacex-advance-guard-joins-tech-skirmishes-to-protect-starlink-in-iran/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">9</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Broomsedge Plots Golf Growth With New Partner And Keiser Ties</h3>
+          <p class="summary">Baker Thompson, a longtime friend of Michael Keiser who helped oversee real estate and development at Sand Valley, has taken over at Broomsedge to lead its future growth.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/erikmatuszewski/2026/03/25/broomsedge-plots-golf-growth-with-new-partner-and-keiser-ties/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">10</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>What Does Arsenal Need To Make The Next Step As A Team?</h3>
+          <p class="summary">Arsenal failed to perform in the Carabao Cup final defeat to Manchester City which raised questions about Mikel Arteta's team.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/grahamruthven/2026/03/25/what-does-arsenal-need-to-make-the-next-step-as-a-team/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">11</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Northern Lights Forecast: 10 States Might See The Aurora Borealis Wednesday</h3>
+          <p class="summary">Observers will have stronger chances at seeing the aurora borealis the closer they are to the U.S.-Canada border, NOAA predicts.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/antoniopequenoiv/2026/03/25/northern-lights-forecast-10-states-might-see-the-aurora-borealis-wednesday/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">12</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Retailers’ Bullish Expansion Plans Suddenly Look Risky</h3>
+          <p class="summary">As gas prices surge, consumer spending tightens and retail expansion plans stall, creating new pressure across the industry.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/gregpetro/2026/03/25/retailers-bullish-expansion-plans-suddenly-look-risky/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">13</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Tiger Woods’ Return Falls Short As LAGC Claims TGL Championship</h3>
+          <p class="summary">Tiger Woods returned to competition, but Jupiter Links fell to Los Angeles Golf Club in the TGL Championship after a late surge that included multiple uses of the hammer.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/break80/2026/03/25/tiger-woods-return-falls-short-as-lagc-claims-tgl-championship/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">14</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Iger’s Future-Forward Deals Unwinding At Internet Speed</h3>
+          <p class="summary">A Disney deal with OpenAi's Sora is done, and a separate partnership with Epic's Fortnite is challenged. Former CEO Bob Iger's Internet-facing deals are unwinding fast</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/dbloom/2026/03/25/igers-future-forward-deals-unwinding-at-internet-speed/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">15</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>The Numbers Behind The Indiana Pacers Franchise-Record Losing Streak</h3>
+          <p class="summary">The Indiana Pacers set their franchise record for consecutive losses this season. What went into the poor stretch of play?</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Forbes - Business</span>
+            <a href="https://www.forbes.com/sites/tonyeast/2026/03/25/the-numbers-behind-the-indiana-pacers-franchise-record-losing-streak/">Read more →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card footer">
+      <p class="footer-note">— 15 items — Personal Newsroom</p>
+    </section>
+  </main>
+</body>
+</html>
