@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekend Research — Personal Newsroom</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f; --bg-soft: #0b1628; --panel: rgba(12,22,40,0.88);
+      --line: rgba(151,170,210,0.18); --text: #f5f7ff;
+      --muted: #a4b1cb; --muted-strong: #c4cde1;
+      --accent: #79b8ff; --accent-2: #8b7dff; --accent-3: #3dd6c6;
+      --success: #68d391; --warning: #f6c25b; --danger: #ff7a9e;
+      --shadow: 0 24px 60px rgba(0,0,0,0.35);
+      --radius-xl: 28px; --radius-lg: 22px; --radius-md: 16px; --radius-sm: 999px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, rgba(121,184,255,0.18), transparent 30%),
+                  radial-gradient(circle at 80% 10%, rgba(139,125,255,0.14), transparent 25%),
+                  linear-gradient(180deg, #08111d 0%, #050b14 100%);
+      color: var(--text); padding: 18px;
+    }
+    .shell { width: min(100%, 560px); margin: 0 auto; display: grid; gap: 16px; }
+    .card { position: relative; overflow: hidden; background: var(--panel);
+             border: 1px solid var(--line); border-radius: var(--radius-xl);
+             box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+    .card::before { content: ""; position: absolute; inset: 0;
+                     background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent 25%);
+                     pointer-events: none; }
+    .hero { padding: 22px 20px 20px;
+             background: radial-gradient(circle at top right, rgba(61,214,198,0.18), transparent 35%),
+                         radial-gradient(circle at top left, rgba(121,184,255,0.20), transparent 30%),
+                         linear-gradient(180deg, rgba(17,29,49,0.98), rgba(11,22,40,0.98)); }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+                color: var(--muted); font-weight: 700; margin-bottom: 12px; }
+    h1 { font-size: 2rem; letter-spacing: -0.04em; margin: 0 0 8px; }
+    .subtitle { color: var(--muted-strong); font-size: 0.95rem; margin: 0; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px;
+              border-radius: var(--radius-sm); background: rgba(255,255,255,0.06);
+              border: 1px solid rgba(255,255,255,0.08); color: var(--muted-strong);
+              font-size: 0.78rem; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .meta-chip { display: inline-flex; align-items: center; padding: 7px 11px;
+                   border-radius: var(--radius-sm); background: rgba(255,255,255,0.04);
+                   border: 1px solid rgba(255,255,255,0.07); color: var(--muted);
+                   font-size: 0.78rem; }
+    .stories { padding: 16px 20px 20px; display: grid; gap: 14px; }
+    .story { padding: 16px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+               border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); }
+    .story-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .rank { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px;
+              background: linear-gradient(180deg, rgba(121,184,255,0.22), rgba(139,125,255,0.18));
+              color: white; font-weight: 800; font-size: 0.95rem; }
+    .impact.high { color: #fff4cf; border-color: rgba(246,194,91,0.28); background: rgba(246,194,91,0.12);
+                     padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.74rem; font-weight: 700; }
+    .topic { color: var(--accent); font-size: 0.78rem; font-weight: 700;
+              text-transform: uppercase; letter-spacing: 0.08em; }
+    .story h3 { font-size: 1.02rem; line-height: 1.35; letter-spacing: -0.02em; margin: 8px 0 0; }
+    .summary { margin-top: 10px; color: var(--muted-strong); line-height: 1.55; font-size: 0.93rem; }
+    .why { padding-top: 10px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .why-label { color: var(--text); font-weight: 700; }
+    .link-row { margin-top: 14px; display: flex; align-items: center; justify-content: space-between;
+                  gap: 12px; color: var(--muted); font-size: 0.82rem; }
+    .link-row a { color: var(--accent); font-weight: 700; }
+    .footer { padding: 18px 20px 20px; }
+    .footer-note { color: var(--muted); font-size: 0.86rem; margin: 0; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card hero">
+      <div class="eyebrow">Personal Newsroom</div>
+      <h1>Weekend Research</h1>
+      <p class="subtitle">Fast signal for Enrique before the day starts.</p>
+      <div class="chip-row">
+        <span class="chip">Overnight Scan</span>
+        <span class="chip">Mobile Read</span>
+        <span class="chip">High Signal</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-chip">Saturday, March 28</span>
+        <span class="meta-chip">America/Chicago</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="stories">
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">1</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">technology</p>
+          <h3>This tax season is a key time to delete your personal data from the internet</h3>
+          <p class="summary">It’s never been easier for spammers and scammers to get access to your personal data, and this is particularly dangerous during tax season. With data brokers providing easy access to your phone number, email address, physical address – and even sensitive data like your social security number – tax season can be peak time for fraud. Fortunately, there’s a simple way to reduce the risk. more…</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: 9to5Mac</span>
+            <a href="https://9to5mac.com/2026/03/28/tax-season-is-key-time-to-delete-your-personal-data-from-internet/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">2</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">technology</p>
+          <h3>This is what a fan is supposed to be — bladeless, sleek and customizable</h3>
+          <p class="summary">The Shark TurboBlade Fan is a sleek, quiet, highly customizable bladeless fan that cools efficiently without the noise, and it’s more than half off. (via Cult of Mac - Your source for the latest Apple news, rumors, analysis, reviews, how-tos and deals. )</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Cult of Mac</span>
+            <a href="https://www.cultofmac.com/deals/shark-turboblade-fan">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">3</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">technology</p>
+          <h3>Today in Apple history: Apple racks up staggering $700 million loss</h3>
+          <p class="summary">On March 28, 1996, Apple warned Wall Street that it would report a $700 million quarterly loss. It was Apple's worst quarter ever. (via Cult of Mac - Your source for the latest Apple news, rumors, analysis, reviews, how-tos and deals. )</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Cult of Mac</span>
+            <a href="https://www.cultofmac.com/apple-history/apple-worst-quarter">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">4</div>
+            <span class="impact medium">Medium impact</span>
+          </div>
+          <p class="topic">technology</p>
+          <h3>You Do Not, in Fact, Have to Hand It to Them</h3>
+          <p class="summary">1 HN comments. 12 points. by MindGods.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 12 pts · 1 comments by MindGods · 2ndbreakfast.audreywatters.com
+          </div>
+          <div class="link-row">
+            <span>Source: HackerNews</span>
+            <a href="https://2ndbreakfast.audreywatters.com/you-do-not-in-fact-have-to-hand-it-to-them/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">5</div>
+            <span class="impact medium">Medium impact</span>
+          </div>
+          <p class="topic">technology</p>
+          <h3>Improved Git Diffs with Delta, Fzf and a Little Shell Scripting</h3>
+          <p class="summary">1 HN comments. 9 points. by nickjj.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 9 pts · 1 comments by nickjj · nickjanetakis.com
+          </div>
+          <div class="link-row">
+            <span>Source: HackerNews</span>
+            <a href="https://nickjanetakis.com/blog/awesome-git-diffs-with-delta-fzf-and-a-little-shell-scripting">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">6</div>
+            <span class="impact medium">Medium impact</span>
+          </div>
+          <p class="topic">science</p>
+          <h3>Bacteria invent another way to turn on genes</h3>
+          <p class="summary">In their landmark 1961 paper on the lac operon, Nobel laureates François Jacob and Jacques Monod speculated that RNA might control gene activity in bacteria through base-pairing interactions. But once protein transcription factors were discovered, the idea was tossed aside. Sixty years later, a multi-institutional team of biologists shows that Jacob and Monod were on to something. Some species of bacteria, reports the team in Nature, have evolved an RNA-guided gene activating system by transform</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Phys.org - latest science and technology news stories</span>
+            <a href="https://phys.org/news/2026-03-bacteria-genes.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">7</div>
+            <span class="impact medium">Medium impact</span>
+          </div>
+          <p class="topic">science</p>
+          <h3>Giant craters may reveal if Psyche is a lost planetary core</h3>
+          <p class="summary">When we think of asteroids, we almost immediately think of giant rocks bouncing around like the iconic chase scene in &quot;The Empire Strikes Back,&quot; and we often hear how they are remnants from the birth of the solar system. While the asteroids that comprise the Main Asteroid Belt of our solar system are not only spread far apart from one another, they are also not all made of rock. One asteroid approximately the size of the state of Massachusetts called 16 Psyche is made of metal, which planetary s</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Phys.org - latest science and technology news stories</span>
+            <a href="https://phys.org/news/2026-03-giant-craters-reveal-psyche-lost.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">8</div>
+            <span class="impact medium">Medium impact</span>
+          </div>
+          <p class="topic">science</p>
+          <h3>College students are writing with AI, but a pilot study finds they're not simply letting it write for them</h3>
+          <p class="summary">Debates about generative AI in higher education have been informed by studies of completed student papers, or self-reported survey data. Research shows that artificial intelligence tools can support learning, but has also raised concerns, including students' overreliance, cheating, and the potential degradation of critical thinking and engagement.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Phys.org - latest science and technology news stories</span>
+            <a href="https://phys.org/news/2026-03-college-students-ai-theyre-simply.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">9</div>
+            <span class="impact medium">Medium impact</span>
+          </div>
+          <p class="topic">science</p>
+          <h3>He Helped Write the Clean Air Act. He Fears for Its Future.</h3>
+          <p class="summary">Thomas Jorling, adviser to Republicans who cosponsored the 1970 law, disputes the Trump administration’s claim that it shouldn’t apply to planet-warming greenhouse gases.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: NYT &gt; Science</span>
+            <a href="https://www.nytimes.com/2026/03/28/climate/thomas-jorling-endangerment-finding-clean-air-act-epa.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">10</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Are you addicted to technology? 6 questions experts use to help spot red flags</h3>
+          <p class="summary">A landmark court ruling has many asking whether their own tech use should raise red flags. Clinicians in the field suggest asking yourself a few brutally honest questions.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Fortune</span>
+            <a href="https://fortune.com/2026/03/28/tech-addiction-questions-verdict-meta-youtube/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">11</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Meet a 29-year-old blue-collar founder who used AI to triple his revenue in 3 years</h3>
+          <p class="summary">Rick Chorney dropped out of high school because he needed to find his own place. Ten years later, he's about to cross the $1 million revenue line.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Fortune</span>
+            <a href="https://fortune.com/2026/03/28/ai-small-business-entrepreneur-1-million-blue-collar/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">12</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>As stocks and bonds fall, and oil hits $100, a futures trade that boomed in 2022 may again be a winner</h3>
+          <p class="summary">Managed futures, which track macro themes expected to play out over months, do well when traditional assets are falling. This could be one of those times.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: US Top News and Analysis</span>
+            <a href="https://www.cnbc.com/2026/03/28/market-correction-futures-hedging-strategies.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">13</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Worried about Strait of Hormuz inflation to come? The world economy has one word for you: Plastics</h3>
+          <p class="summary">Worried about consumer inflation to come from Strait of Hormuz closure? The economy has one word for you other than oil: plastics.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: US Top News and Analysis</span>
+            <a href="https://www.cnbc.com/2026/03/28/iran-war-strait-of-hormuz-petrochemicals-oil-plastics.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">14</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Bitesize Prediction: Real Zaragoza vs Racing Santander – 29/03/26</h3>
+          <p class="summary">Competition: Spanish Segunda Market: Racing Santander draw no bet Odds: 8/11 @ BetUS Seeking an immediate Segunda response this weekend, Racing Santander will travel to Aragon when they meet Real Zaragoza on Sunday evening. Starting with the hosts, while Real Zaragoza might have clung to their Segunda status last season, Los Manos find themselves at […] The post Bitesize Prediction: Real Zaragoza vs Racing Santander – 29/03/26 appeared first on Soccer News .</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Soccer News</span>
+            <a href="https://www.soccernews.com/bitesize-prediction-real-zaragoza-vs-racing-santander-29-03-26/397862/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">15</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Bitesize Prediction: Eibar vs Las Palmas – 29/03/26</h3>
+          <p class="summary">Competition: Spanish Segunda Market: Eibar draw no bet Odds: 8/11 @ 1xBet In what could prove to be a season-defining showdown this weekend, Eibar will welcome Las Palmas to the Basque Country on Sunday lunchtime. Starting with the hosts, while Eibar might have a real uphill battle on their hands in the race to punch […] The post Bitesize Prediction: Eibar vs Las Palmas – 29/03/26 appeared first on Soccer News .</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Soccer News</span>
+            <a href="https://www.soccernews.com/bitesize-prediction-eibar-vs-las-palmas-29-03-26/397861/">Read more →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card footer">
+      <p class="footer-note">— 15 items — Personal Newsroom</p>
+    </section>
+  </main>
+</body>
+</html>
