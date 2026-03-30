@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ai Daily — Personal Newsroom</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f; --bg-soft: #0b1628; --panel: rgba(12,22,40,0.88);
+      --line: rgba(151,170,210,0.18); --text: #f5f7ff;
+      --muted: #a4b1cb; --muted-strong: #c4cde1;
+      --accent: #79b8ff; --accent-2: #8b7dff; --accent-3: #3dd6c6;
+      --success: #68d391; --warning: #f6c25b; --danger: #ff7a9e;
+      --shadow: 0 24px 60px rgba(0,0,0,0.35);
+      --radius-xl: 28px; --radius-lg: 22px; --radius-md: 16px; --radius-sm: 999px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, rgba(121,184,255,0.18), transparent 30%),
+                  radial-gradient(circle at 80% 10%, rgba(139,125,255,0.14), transparent 25%),
+                  linear-gradient(180deg, #08111d 0%, #050b14 100%);
+      color: var(--text); padding: 18px;
+    }
+    .shell { width: min(100%, 560px); margin: 0 auto; display: grid; gap: 16px; }
+    .card { position: relative; overflow: hidden; background: var(--panel);
+             border: 1px solid var(--line); border-radius: var(--radius-xl);
+             box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+    .card::before { content: ""; position: absolute; inset: 0;
+                     background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent 25%);
+                     pointer-events: none; }
+    .hero { padding: 22px 20px 20px;
+             background: radial-gradient(circle at top right, rgba(61,214,198,0.18), transparent 35%),
+                         radial-gradient(circle at top left, rgba(121,184,255,0.20), transparent 30%),
+                         linear-gradient(180deg, rgba(17,29,49,0.98), rgba(11,22,40,0.98)); }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+                color: var(--muted); font-weight: 700; margin-bottom: 12px; }
+    h1 { font-size: 2rem; letter-spacing: -0.04em; margin: 0 0 8px; }
+    .subtitle { color: var(--muted-strong); font-size: 0.95rem; margin: 0; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px;
+              border-radius: var(--radius-sm); background: rgba(255,255,255,0.06);
+              border: 1px solid rgba(255,255,255,0.08); color: var(--muted-strong);
+              font-size: 0.78rem; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .meta-chip { display: inline-flex; align-items: center; padding: 7px 11px;
+                   border-radius: var(--radius-sm); background: rgba(255,255,255,0.04);
+                   border: 1px solid rgba(255,255,255,0.07); color: var(--muted);
+                   font-size: 0.78rem; }
+    .stories { padding: 16px 20px 20px; display: grid; gap: 14px; }
+    .story { padding: 16px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+               border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); }
+    .story-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .rank { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 12px;
+              background: linear-gradient(180deg, rgba(121,184,255,0.22), rgba(139,125,255,0.18));
+              color: white; font-weight: 800; font-size: 0.95rem; }
+    .impact.high { color: #fff4cf; border-color: rgba(246,194,91,0.28); background: rgba(246,194,91,0.12);
+                     padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.74rem; font-weight: 700; }
+    .topic { color: var(--accent); font-size: 0.78rem; font-weight: 700;
+              text-transform: uppercase; letter-spacing: 0.08em; }
+    .story h3 { font-size: 1.02rem; line-height: 1.35; letter-spacing: -0.02em; margin: 8px 0 0; }
+    .summary { margin-top: 10px; color: var(--muted-strong); line-height: 1.55; font-size: 0.93rem; }
+    .why { padding-top: 10px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .why-label { color: var(--text); font-weight: 700; }
+    .link-row { margin-top: 14px; display: flex; align-items: center; justify-content: space-between;
+                  gap: 12px; color: var(--muted); font-size: 0.82rem; }
+    .link-row a { color: var(--accent); font-weight: 700; }
+    .footer { padding: 18px 20px 20px; }
+    .footer-note { color: var(--muted); font-size: 0.86rem; margin: 0; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card hero">
+      <div class="eyebrow">Personal Newsroom</div>
+      <h1>Ai Daily</h1>
+      <p class="subtitle">Fast signal for Enrique before the day starts.</p>
+      <div class="chip-row">
+        <span class="chip">Overnight Scan</span>
+        <span class="chip">Mobile Read</span>
+        <span class="chip">High Signal</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-chip">Monday, March 30</span>
+        <span class="meta-chip">America/Chicago</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="stories">
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">1</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>ProCap Financial stockholders approve acquisition of AI agent lab CFO Silvia</h3>
+          <p class="summary"></p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Breaking News on Seeking Alpha</span>
+            <a href="https://seekingalpha.com/news/4570145-procap-financial-stockholders-approve-acquisition-of-ai-agent-lab-cfo-silvia?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">2</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">technology</p>
+          <h3>Gentler Streak’s Wellness section now features cardio fitness data</h3>
+          <p class="summary">Starting today, Gentler Streak users can check VO₂ max estimate data, with trends and averages, for a more complete snapshot of their fitness. Here are the details. more…</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: 9to5Mac</span>
+            <a href="https://9to5mac.com/2026/03/30/gentler-streaks-wellness-section-now-features-cardio-fitness-data/">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">3</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>Bicara Therapeutics GAAP EPS of -$0.68</h3>
+          <p class="summary"></p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: Breaking News on Seeking Alpha</span>
+            <a href="https://seekingalpha.com/news/4570147-bicara-therapeutics-gaap-eps-of-0_68?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">4</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">business_finance</p>
+          <h3>New fees, fewer flights: Higher fuel prices pinch consumer budgets beyond the gas pump</h3>
+          <p class="summary">As corporate policies change, Americans will feel higher oil prices in their wallets beyond the gas pump.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: US Top News and Analysis</span>
+            <a href="https://www.cnbc.com/2026/03/28/oil-doordash-lyft-usps-united.html">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">5</div>
+            <span class="impact medium">Medium impact</span>
+          </div>
+          <p class="topic">entertainment</p>
+          <h3>Jenna Ortega’s $137M Entry in Iconic Horror Franchise To Stream on Netflix</h3>
+          <p class="summary">The 2022 sequel to an iconic horror franchise starring Jenna Ortega is coming to Netflix soon. The film introduces new characters and takes place more than two decades after the events of the original film, bringing back some of the cast who helped make the franchise a cultural phenomenon. Scream begins streaming on Netflix in […] The post Jenna Ortega’s $137M Entry in Iconic Horror Franchise To Stream on Netflix appeared first on ComingSoon.net - Movie Trailers, TV &amp; Streaming N</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: ComingSoon.net</span>
+            <a href="https://www.comingsoon.net/movies/news/2113714-scream-streaming-date-netflix-april-jenna-ortega">Read more →</a>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-top">
+            <div class="rank">6</div>
+            <span class="impact high">High impact</span>
+          </div>
+          <p class="topic">sports</p>
+          <h3>Future of Giannis and Ja, and the big questions facing every NBA lottery team</h3>
+          <p class="summary">With 10 NBA teams already eyeing the offseason, Bobby Marks examines each front office's biggest priority.</p>
+          <div class="why">
+            <span class="why-label">Why it matters:</span> 
+          </div>
+          <div class="link-row">
+            <span>Source: www.espn.com - TOP</span>
+            <a href="https://www.espn.com/nba/story/_/id/48326062/nba-draft-big-questions-10-lottery-teams-bucks-giannis-grizzlies-morant">Read more →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card footer">
+      <p class="footer-note">— 6 items — Personal Newsroom</p>
+    </section>
+  </main>
+</body>
+</html>
