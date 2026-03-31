@@ -103,6 +103,12 @@
       "title": "Ai Daily",
       "versions": [
         {
+          "date": "2026-03-31",
+          "json_path": "digests/ai-daily/2026-03-31.json",
+          "html_path": "archive/2026-03-31-ai-daily.html",
+          "item_count": 14
+        },
+        {
           "date": "2026-03-30",
           "json_path": "digests/ai-daily/2026-03-30.json",
           "html_path": "archive/2026-03-30-ai-daily.html",
