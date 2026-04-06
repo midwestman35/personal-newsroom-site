@@ -99,6 +99,12 @@
       "title": "Finance Close",
       "versions": [
         {
+          "date": "2026-04-06",
+          "json_path": "digests/finance-close/2026-04-06.json",
+          "html_path": "archive/2026-04-06-finance-close.html",
+          "item_count": 15
+        },
+        {
           "date": "2026-04-03",
           "json_path": "digests/finance-close/2026-04-03.json",
           "html_path": "archive/2026-04-03-finance-close.html",
